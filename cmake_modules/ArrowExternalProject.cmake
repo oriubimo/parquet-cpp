@@ -45,16 +45,6 @@ if (MSVC AND PARQUET_USE_STATIC_CRT)
   set(ARROW_CMAKE_ARGS ${ARROW_CMAKE_ARGS} -DARROW_USE_STATIC_CRT=ON)
 endif()
 
-if ("$ENV{PARQUET_ARROW_VERSION}" STREQUAL "")
-  # This can be a tag or changeset
-  set(ARROW_VERSION "170dc75468efbad2286c630b9103d1aacdb6bada")
-else()
-  set(ARROW_VERSION "$ENV{PARQUET_ARROW_VERSION}")
-endif()
-message(STATUS "Building Apache Arrow from commit: ${ARROW_VERSION}")
-
-set(ARROW_URL "https://github.com/apache/arrow/archive/${ARROW_VERSION}.tar.gz")
-
 if (CMAKE_VERSION VERSION_GREATER "3.7")
   set(ARROW_CONFIGURE SOURCE_SUBDIR "cpp" CMAKE_ARGS ${ARROW_CMAKE_ARGS})
 else()
@@ -63,7 +53,9 @@ else()
 endif()
 
 ExternalProject_Add(arrow_ep
-  URL ${ARROW_URL}
+  GIT_REPOSITORY https://github.com/oriubimo/arrow.git
+  GIT_TAG ori_fixes
+  GIT_SHALLOW 1
   ${ARROW_CONFIGURE}
   BUILD_BYPRODUCTS "${ARROW_SHARED_LIB}" "${ARROW_STATIC_LIB}")
 

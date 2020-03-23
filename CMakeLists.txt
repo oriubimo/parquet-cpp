@@ -115,7 +115,7 @@ string (TOLOWER ${CMAKE_BUILD_TYPE} BUILD_SUBDIR_NAME)
 if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
   option(PARQUET_BUILD_SHARED
     "Build the shared version of libparquet"
-    ON)
+    OFF)
   option(PARQUET_BUILD_STATIC
     "Build the static version of libparquet. Always ON if building unit tests"
     ON)
@@ -135,7 +135,7 @@ if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
   option(PARQUET_BOOST_USE_SHARED
     "Rely on boost shared libraries where relevant"
-    ON)
+    OFF)
   option(PARQUET_BUILD_TESTS
     "Build the libparquet test suite"
     ON)
